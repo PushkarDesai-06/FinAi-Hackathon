@@ -1,10 +1,10 @@
 import Chart from 'chart.js/auto';
 
 document.addEventListener('DOMContentLoaded', function () {
-    const chartContainer = document.getElementById('chartContainer');
-    const canvas = document.createElement('canvas');
-    canvas.id = 'myChart';
-    chartContainer.appendChild(canvas);
+  const chartContainer = document.getElementById('chartContainer');
+  const canvas = document.createElement('canvas');
+  canvas.id = 'myChart';
+  chartContainer.appendChild(canvas);
 });
 
 class ExpenseTracker {
@@ -68,7 +68,7 @@ class ExpenseTracker {
   }
 
   getLast7Days() {
-    return Array.from({length: 7}, (_, i) => {
+    return Array.from({ length: 7 }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - i);
       return d.toISOString().split('T')[0];

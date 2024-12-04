@@ -14,6 +14,47 @@
         window.location.href = "./login/login.html";
       }
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dailyTotalElement = document.getElementById("dailyTotal2");
+
+        // Replace with your actual username retrieval method
+        const username = localStorage.getItem("currentUsername");
+
+        if (!username) {
+          console.error("Username not found in localStorage.");
+          dailyTotalElement.textContent = "0.00";
+          return;
+        }
+
+        fetch(`http://localhost:8000/expenses/${username}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.expenses) {
+              // Modify this line to use local date in 'YYYY-MM-DD' format
+              const today = new Date().toLocaleDateString("en-CA"); // 'en-CA' locale formats date as 'YYYY-MM-DD'
+              console.log(today);
+
+              const todaysExpenses = data.expenses.filter((exp) =>
+                exp.date.startsWith(today)
+              );
+              const total = todaysExpenses.reduce(
+                (sum, exp) => sum + exp.amount,
+                0
+              );
+              dailyTotalElement.textContent = total.toFixed(2);
+            } else {
+              console.log(today);
+              console.error("No expenses data found.");
+              dailyTotalElement.textContent = "0.00";
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching expenses:", error);
+            dailyTotalElement.textContent = "0.00";
+          });
+      });
+    </script>
     <div
       class="Bottom grow-[0.9] bg-[#FAFAF5] p-4 flex justify-center items-center"
     >

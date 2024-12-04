@@ -64,7 +64,7 @@ class ExpenseTracker {
         username: this.username,
         amount: Number(amount),
         description: description,
-        date: new Date(date).toISOString() // Convert to ISO format
+        date: date // Store as 'YYYY-MM-DD'
       };
 
       try {
