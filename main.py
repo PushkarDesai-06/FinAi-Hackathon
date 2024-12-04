@@ -78,5 +78,6 @@ class UserMessage(BaseModel):
 async def chat_with_gemini(user_message: UserMessage):
     # Replace with your Gemini chatbot API interaction
     # For example, you may need to make an API call here to the Gemini model
+    
     response = model.generate_content(user_message.message)
     return {"response": response.text}

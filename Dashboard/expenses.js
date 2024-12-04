@@ -149,11 +149,13 @@ document.getElementById('chatbotSend').addEventListener('click', async () => {
     }
 });
 
+
 // Function to display messages in the chatbox
+
 function displayMessage(message, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
-    messageDiv.textContent = message;
+    messageDiv.innerHTML = marked.parse(message);
     
     // Append message to the message area
     const messageContainer = document.getElementById('response');
