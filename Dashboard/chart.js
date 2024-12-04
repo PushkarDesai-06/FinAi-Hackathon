@@ -104,9 +104,10 @@ class ExpenseTracker {
   }
 
   getLast7Days() {
+    const today = new Date();
     return Array.from({ length: 7 }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
+      const d = new Date(today);
+      d.setDate(d.getDate() - i + 1); // start from today and go back 6 days
       return d.toISOString().split('T')[0];
     }).reverse();
   }

@@ -147,17 +147,22 @@ class DetailedExpenses {
 
     updateDetailedChart() {
         const dailyTotals = this.getMonthlyTotals();
+        console.log('dailyTotals:', dailyTotals[dailyTotals.length-1]);
         this.chart.data.datasets[0].data = dailyTotals;
         this.chart.update();
+        const todaysum = document.querySelector('#dailyTotal')
+        const todaysumvalue =document.createElement('span')
+        todaysumvalue.textContent = dailyTotals[dailyTotals.length-1]
+        todaysum.appendChild(todaysumvalue)
     }
-
     getLast30Days() {
+        const today = new Date();
         return Array.from({ length: 30 }, (_, i) => {
-            const d = new Date();
-            d.setDate(d.getDate() - i);
-            return d.toISOString().split('T')[0];
+          const d = new Date(today);
+          d.setDate(d.getDate() - i + 1); // start from today and go back 29 days
+          return d.toISOString().split('T')[0];
         }).reverse();
-    }
+      }
 
     getMonthlyTotals() {
         const days = this.getLast30Days();
@@ -209,6 +214,8 @@ function displayMessage(message, sender) {
     // Scroll to the bottom of the chat
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
+
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {

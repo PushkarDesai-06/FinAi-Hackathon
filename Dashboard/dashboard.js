@@ -17,3 +17,9 @@ if (time >= 0 && time < 12) {
 } else if (time >= 17 && time < 24) {
     greetings.innerText = `Good Evening, ${localStorage.getItem("currentUsername")}`;
 }
+
+const dailyTotals = this.getMonthlyTotals();
+const todaysum2 = document.querySelector('#dailyTotal2')
+const todaysumvalue2 =document.createElement('span')
+todaysumvalue2.textContent = dailyTotals[dailyTotals.length-1]
+todaysum2.appendChild(todaysumvalue2)
