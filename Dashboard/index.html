@@ -23,18 +23,27 @@
   <body>
     <main class="w-[80%] mx-auto my-2">
       <div class="max-w-3xl mx-auto">
-        <!-- Content -->
-      </div>
-      <button
-        id="backButton"
-        type="button"
-        class="my-5 bg-[#426B1F] text-white box-border px-5 py-2 rounded-md overflow-hidden"
-      >
-        Back
-      </button>
-      <h1 class="greetings text-6xl my-8 select-none">Good Morning, User</h1>
-      <hr width="100%" class="mx-auto" />
+        
+        <!-- Flex Container for Greeting and Log Out Button -->
+        <div class="flex justify-between items-center mb-8 mt-10">
+          <h1 class="greetings text-6xl select-none">
+            Good Morning, User
+          </h1>
+          <button
+            id="backButton"
+            type="button"
+            class="bg-[#426B1F] px-4 py-2 rounded-full text-white hover:bg-green-700 transition duration-200 flex items-center justify-center"
+            aria-label="Log Out"
+          >
+            <i class="bi bi-box-arrow-right text-xl"></i>
+          </button>
+        </div>
+        
+        <hr width="100%" class="mx-auto mb-8" />
+        
+        <!-- ... rest of your content ... -->
 
+      </div>
       <div class="data flex rounded-3xl my-5 box-border gap-4">
         <div
           class="Left min-h-full grow-[0.7] rounded-3xl flex flex-col box-border justify-between gap-4"
