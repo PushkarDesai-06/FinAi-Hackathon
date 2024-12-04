@@ -147,26 +147,26 @@ class DetailedExpenses {
 
     updateDetailedChart() {
         const dailyTotals = this.getMonthlyTotals();
-        console.log('dailyTotals:', dailyTotals[dailyTotals.length-1]);
+        console.log('dailyTotals:', dailyTotals[dailyTotals.length - 1]);
         this.chart.data.datasets[0].data = dailyTotals;
         this.chart.update();
         const todaysum = document.querySelector('#dailyTotal')
-        const todaysumvalue =document.createElement('span')
-        todaysumvalue.textContent = dailyTotals[dailyTotals.length-1]
+        const todaysumvalue = document.createElement('span')
+        todaysumvalue.textContent = dailyTotals[dailyTotals.length - 1]
         todaysum.appendChild(todaysumvalue)
     }
     getLast30Days() {
         const today = new Date();
         return Array.from({ length: 30 }, (_, i) => {
-          const d = new Date(today);
-          d.setDate(d.getDate() - i + 1); // start from today and go back 29 days
-          return d.toISOString().split('T')[0];
+            const d = new Date(today);
+            d.setDate(d.getDate() - i + 1); // start from today and go back 29 days
+            return d.toISOString().split('T')[0];
         }).reverse();
-      }
+    }
 
     getMonthlyTotals() {
         const days = this.getLast30Days();
-        return days.map(day => {    
+        return days.map(day => {
             return this.expenses
                 .filter(exp => exp.date.startsWith(day))
                 .reduce((sum, exp) => sum + exp.amount, 0);
@@ -174,34 +174,48 @@ class DetailedExpenses {
     }
 }
 
-document.getElementById('chatbotSend').addEventListener('click', async () => {
-    const userInput = document.getElementById('expenseDescription').value.trim();
-    console.log(userInput);
-    if (userInput) {
-        // Display user message in the chat
-        displayMessage(userInput, 'user');
-        document.getElementById('expenseDescription').value = '';  // Clear input field
+// Dashboard/expenses.js
 
-        // Send user input to FastAPI backend for chatbot response
-        const response = await fetch('http://127.0.0.1:8000/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: userInput, username: localStorage.getItem('currentUsername') }),
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbotSendButton = document.getElementById('chatbotSend');
+    const expenseDescriptionInput = document.getElementById('expenseDescription');
 
-        const data = await response.json();
-        const botResponse = data.response;
+    // Existing event listener for send button
+    chatbotSendButton.addEventListener('click', async () => {
+        const userInput = expenseDescriptionInput.value.trim();
+        console.log(userInput);
+        if (userInput) {
+            // Display user message in the chat
+            displayMessage(userInput, 'user');
+            expenseDescriptionInput.value = '';  // Clear input field
 
-        // Display chatbot response in the chat
-        displayMessage(botResponse, 'bot');
-    }
+            // Send user input to FastAPI backend for chatbot response
+            const response = await fetch('http://127.0.0.1:8000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput, username: localStorage.getItem('currentUsername') }),
+            });
+
+            const data = await response.json();
+            const botResponse = data.response;
+
+            // Display chatbot response in the chat
+            displayMessage(botResponse, 'bot');
+        }
+    });
+
+    // New event listener for Enter key
+    expenseDescriptionInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if inside a form
+            chatbotSendButton.click(); // Trigger the send button's click event
+        }
+    });
 });
 
-
 // Function to display messages in the chatbox
-
 function displayMessage(message, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
@@ -214,8 +228,6 @@ function displayMessage(message, sender) {
     // Scroll to the bottom of the chat
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
-
-
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
