@@ -5,7 +5,9 @@ class ExpenseTracker {
     this.loadExpenses();
     this.initializeChart();
     this.setupEventListeners();
-    this.updateUI();
+    document.addEventListener('DOMContentLoaded', () => {
+      this.updateUI();
+    });
   }
 
   async loadExpenses() {
@@ -104,9 +106,10 @@ class ExpenseTracker {
   }
 
   getLast7Days() {
+    const today = new Date();
     return Array.from({ length: 7 }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
+      const d = new Date(today);
+      d.setDate(d.getDate() - i + 1); // start from today and go back 6 days
       return d.toISOString().split('T')[0];
     }).reverse();
   }
@@ -116,7 +119,12 @@ class ExpenseTracker {
     const dailyTotal = this.expenses
       .filter(exp => exp.date.startsWith(today))
       .reduce((sum, exp) => sum + exp.amount, 0);
-    document.getElementById('dailyTotal').textContent = dailyTotal.toFixed(2);
+    const dailyTotalElement = document.getElementById('dailyTotal');
+    if (dailyTotalElement) {
+      dailyTotalElement.textContent = dailyTotal.toFixed(2);
+    } else {
+      console.error('Element with id "dailyTotal" not found');
+    }
   }
 
   updateChart() {
