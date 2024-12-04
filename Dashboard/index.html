@@ -152,9 +152,7 @@
               />
               <!-- New Date Picker Input -->
               <div class="w-full">
-                <label for="expenseDate" class="block text-gray-700"
-                  >Date</label
-                >
+                <label for="expenseDate" class="block text-gray-700">Date</label>
                 <input
                   type="date"
                   id="expenseDate"
@@ -207,6 +205,26 @@
 
       // Call the function when DOM is loaded
       document.addEventListener('DOMContentLoaded', calculateDailyTotal);
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const setTodayDate = (inputId) => {
+          const dateInput = document.getElementById(inputId);
+          if (dateInput) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
+            const dd = String(today.getDate()).padStart(2, '0');
+            const formattedToday = `${yyyy}-${mm}-${dd}`;
+            dateInput.value = formattedToday;
+          }
+        };
+
+        // Set default dates for specific inputs
+        setTodayDate('expenseDate'); // For Dashboard/index.html
+        setTodayDate('applicationDate'); // For checkLoanEligibility.html
+        // Add more IDs as needed
+      });
     </script>
   </body>
 </html>
