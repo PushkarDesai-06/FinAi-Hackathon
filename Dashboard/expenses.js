@@ -159,7 +159,7 @@ class DetailedExpenses {
         const today = new Date();
         return Array.from({ length: 30 }, (_, i) => {
             const d = new Date(today);
-            d.setDate(d.getDate() - i + 1); // start from today and go back 29 days
+            d.setDate(d.getDate() - i); // start from today and go back 29 days
             return d.toISOString().split('T')[0];
         }).reverse();
     }
