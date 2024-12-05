@@ -25,14 +25,20 @@
       <div class="max-w-3xl mx-auto">
         
         <!-- Flex Container for Greeting and Log Out Button -->
-        <div class="flex justify-between items-center mb-8 mt-10">
-          <h1 class="greetings text-6xl select-none">
-            Good Morning, User
-          </h1>
+        <div class="flex justify-center items-center mb-8 mt-10">
+          <div class="flex items-center">
+            <!-- FinAi Branding -->
+            <div class="flex items-center mr-6 absolute left-40">
+              <span class="text-3xl font-bold text-green-700">FinAi</span>
+            </div>
+            <h1 class="greetings text-6xl select-none justify-center">
+              Good Morning, User
+            </h1>
+          </div>
           <button
             id="backButton"
             type="button"
-            class="bg-[#426B1F] px-4 py-2 rounded-full text-white hover:bg-green-700 transition duration-200 flex items-center justify-center"
+            class="bg-[#426B1F] px-4 py-2 rounded-full text-white hover:bg-green-700 transition duration-200 flex items-center justify-center absolute right-40"
             aria-label="Log Out"
           >
             <i class="bi bi-box-arrow-right text-xl"></i>
