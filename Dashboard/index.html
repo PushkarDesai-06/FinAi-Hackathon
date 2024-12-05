@@ -194,7 +194,7 @@
         }
 
         try {
-          const response = await fetch(`http://localhost:8000/expenses/${username}`);
+          const response = await fetch(`https://finai-hackathon.onrender.com/expenses/${username}`);
           const data = await response.json();
 
           if (data.expenses) {
