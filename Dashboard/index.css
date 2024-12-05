@@ -6,6 +6,14 @@
   padding: 8px;
 }
 
+#logoTop {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  user-select: none;
+}
+
 #weighingScale {
   color: black;
   margin: 8px;
