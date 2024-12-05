@@ -13,21 +13,18 @@
       </h1>
       <form id="loanEligibilityForm" class="space-y-4">
         <div>
-          <label for="income" class="block text-gray-700"
-            >Annual Income ($)</label
-          >
+          <label for="income" class="block text-gray-700">Annual Income (INR)</label>
           <input
             type="number"
             id="income"
             placeholder="e.g., 50000"
             class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             required
+            min="0"
           />
         </div>
         <div>
-          <label for="creditScore" class="block text-gray-700"
-            >Credit Score</label
-          >
+          <label for="creditScore" class="block text-gray-700">Credit Score</label>
           <input
             type="number"
             id="creditScore"
@@ -38,20 +35,44 @@
             max="850"
           />
         </div>
-
         <div>
-          Desired Loan Amount (₹)
+          <label for="age" class="block text-gray-700">Age</label>
+          <input
+            type="number"
+            id="age"
+            placeholder="e.g., 30"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+            min="21"
+            max="60"
+          />
+        </div>
+        <div>
+          <label for="dti" class="block text-gray-700">Debt-to-Income Ratio (%)</label>
+          <input
+            type="number"
+            id="dti"
+            placeholder="e.g., 35"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+            min="0"
+            max="100"
+          />
+        </div>
+        <div>
+          <label for="loanAmount" class="block text-gray-700">Desired Loan Amount (₹)</label>
           <input
             type="number"
             id="loanAmount"
-            placeholder="e.g., 20000"
+            placeholder="e.g., 200000"
             class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             required
+            min="0"
           />
         </div>
         <button
           type="submit"
-          class="w-full bg-[#426b1f] text-white py-2 rounded-lg hover:bg-green-700 transition duration-200"
+          class="w-full bg-[#426B1F] text-white py-2 rounded-lg hover:bg-green-700 transition duration-200"
         >
           Check Eligibility
         </button>
@@ -66,18 +87,5 @@
     </div>
 
     <script src="checkLoanEligibility.js"></script>
-    <script>
-      // [Dashboard/LoanEligibility/checkLoanEligibility.js](Dashboard/LoanEligibility/checkLoanEligibility.js)
-      if (eligible) {
-        resultDiv.textContent =
-          "Congratulations! You are eligible for the loan of ₹" +
-          loanAmount +
-          ".";
-        resultDiv.className = "text-green-600";
-      } else {
-        resultDiv.textContent = `Unfortunately, you are not eligible for the loan. Reason: ${reason}`;
-        resultDiv.className = "text-red-600";
-      }
-    </script>
   </body>
 </html>
