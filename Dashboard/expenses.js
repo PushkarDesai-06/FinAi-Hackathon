@@ -14,7 +14,7 @@ class DetailedExpenses {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/expenses/${this.username}`);
+            const response = await fetch(`https://finai-hackathon.onrender.com/expenses/${this.username}`);
             const data = await response.json();
             if (response.ok) {
                 this.expenses = data.expenses;
@@ -67,7 +67,7 @@ class DetailedExpenses {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/expenses/delete/${expenseId}`, {
+            const response = await fetch(`https://finai-hackathon.onrender.com/expenses/delete/${expenseId}`, {
                 method: 'DELETE',
             });
             const result = await response.json();
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             expenseDescriptionInput.value = '';  // Clear input field
 
             // Send user input to FastAPI backend for chatbot response
-            const response = await fetch('http://127.0.0.1:8000/chat', {
+            const response = await fetch('https://finai-hackathon.onrender.com/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

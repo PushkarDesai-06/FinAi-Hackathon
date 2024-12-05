@@ -27,7 +27,7 @@
           return;
         }
 
-        fetch(`http://localhost:8000/expenses/${username}`)
+        fetch(`https://finai-hackathon.onrender.com/expenses/${username}`)
           .then((response) => response.json())
           .then((data) => {
             if (data.expenses) {

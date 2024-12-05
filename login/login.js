@@ -41,7 +41,7 @@ loginBtn.addEventListener('click', async (e) => {
 
     let isCorrect
 
-    let res = await fetch("http://localhost:8000/auth", {
+    let res = await fetch("https://finai-hackathon.onrender.com/auth", {
         method: "POST",
         body: JSON.stringify({
             "username": `${Username.value}`,
@@ -74,7 +74,7 @@ loginBtn.addEventListener('click', async (e) => {
 
 registerBtn.addEventListener('click', async (e) => {
 
-    let res = await fetch('http://localhost:8000/chkUser', {
+    let res = await fetch('https://finai-hackathon.onrender.com/chkUser', {
         method: 'POST',
         body: JSON.stringify({
             "username": `${Username.value}`,
@@ -97,7 +97,7 @@ registerBtn.addEventListener('click', async (e) => {
     }
     else {
 
-        let res = await fetch("http://localhost:8000/register", {
+        let res = await fetch("https://finai-hackathon.onrender.com/register", {
             method: "POST",
             body: JSON.stringify({
                 "username": `${Username.value}`,
